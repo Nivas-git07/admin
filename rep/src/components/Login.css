@@ -1,0 +1,23 @@
+/* Background gradient */
+.bg-gradient {
+  background: linear-gradient(270deg, #e0e0e0, #b0b0b0, #e0e0e0, #b0b0b0);
+  background-size: 400% 400%;
+}
+
+/* Button zoomOut animation */
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+.login-btn {
+  transition: transform 0.3s ease;
+}
+
+.login-btn:hover {
+  animation: zoomOut 0.3s forwards;
+}
