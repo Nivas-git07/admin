@@ -4,15 +4,46 @@ import "./Login.css";
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email && password) {
-      onLogin(); // move to dashboard
-    } else {
+
+    if (!email || !password) {
       alert("Please enter email and password");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+
+      
+      localStorage.setItem("token", data.token);
+
+      
+      onLogin();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient">
