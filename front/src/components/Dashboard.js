@@ -6,28 +6,66 @@ export default function Dashboard() {
   return (
     <main className="dashboard">
       {/* Cards */}
-      <section className="dashboard-cards">
-        <div className="card total">
-          <p>Total Complaints</p>
-          <p>{complaints.length}</p>
-          <p>All time reports</p>
+      
+
+      <div class="stats-grid">
+        <div className="stat-card">
+          <div className="stat-content">
+            <div>
+              <p className="stat-label">Total report</p>
+              <p className="stat-number">100</p>
+            </div>
+            <svg
+              className="stat-icon"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"></polyline>
+            </svg>
+          </div>
         </div>
-        <div className="card open">
-          <p>Open</p>
-          <p>{complaints.filter((c) => c.status === "open").length}</p>
-          <p>Needs attention</p>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div>
+              <p class="stat-label">Open</p>
+              <p class="stat-number open">200</p>
+            </div>
+            <svg class="stat-icon open" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </div>
         </div>
-        <div className="card progress">
-          <p>In Progress</p>
-          <p>{complaints.filter((c) => c.status === "inprogress").length}</p>
-          <p>Being processed</p>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div>
+              <p class="stat-label">In Progress</p>
+              <p class="stat-number progress">100</p>
+            </div>
+            <svg class="stat-icon progress" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12,6 12,12 16,14"></polyline>
+            </svg>
+          </div>
         </div>
-        <div className="card resolved">
-          <p>Resolved</p>
-          <p>{complaints.filter((c) => c.status === "resolved").length}</p>
-          <p>Successfully closed</p>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div>
+              <p class="stat-label">Resolved</p>
+              <p class="stat-number resolved">300</p>
+            </div>
+            <svg class="stat-icon resolved" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22,4 12,14.01 9,11.01"></polyline>
+            </svg>
+          </div>
         </div>
-      </section>
+      </div>
 
       {/* Complaint Reports */}
       <section className="reports">

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 5000;
 const path = require('path');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -10,6 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 require('dotenv').config();
 
 app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,6 +20,7 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
+
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 

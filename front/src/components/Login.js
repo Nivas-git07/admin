@@ -31,10 +31,10 @@ export default function Login({ onLogin }) {
         throw new Error(data.error || "Login failed");
       }
 
-      
+
       localStorage.setItem("token", data.token);
 
-      
+
       onLogin();
     } catch (err) {
       alert(err.message);
@@ -107,9 +107,10 @@ export default function Login({ onLogin }) {
 
           <button
             type="submit"
+            disabled={loading}
             className="login-btn w-full bg-gray-900 text-white font-semibold py-3 rounded-xl text-lg hover:bg-gray-800 transition shadow"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
 
           <p className="text-center text-sm text-gray-900 mt-5 cursor-pointer select-none hover:underline">
