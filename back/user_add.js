@@ -9,6 +9,7 @@ const port = 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // PostgreSQL connection
 const pool = new Pool({
