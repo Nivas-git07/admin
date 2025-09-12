@@ -95,7 +95,7 @@
 }
 
 .tag-status.open { background: #dc2626; }
-.tag-status.inprogress { background: #4338ca; }
+.tag-status.inprogress { background:  #f59e0b; }
 .tag-status.resolved { background: #16a34a; }
 
 .tag-priority {
@@ -762,6 +762,5 @@ header {
   width: 100%;
   height: 100%;
   object-fit: cover;  /* crop instead of stretch */
-  border-radius: 8px;
+  border-radius: 8px;
 }
-

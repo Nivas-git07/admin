@@ -17,7 +17,7 @@ export default function Analytics() {
     datasets: [
       {
         data: Object.values(statusCounts),
-        backgroundColor: ["#DC2626", "#4338CA", "#16A34A"],
+        backgroundColor: ["#DC2626", "#f59e0b", "#16A34A"],
       },
     ],
   };
