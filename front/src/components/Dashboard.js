@@ -10,6 +10,41 @@ export default function Dashboard() {
   const [showReasonBox, setShowReasonBox] = useState(false);
   const [actionType, setActionType] = useState("");
   const [reason, setReason] = useState("");
+  const updateStatus = async (complaintId, newStatus) => {
+  try {
+    const res = await fetch(`http://localhost:5000/${complaintId}/status`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: newStatus }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || "Failed to update status");
+      return;
+    }
+
+    // ✅ Update UI immediately
+    setComplaints((prev) =>
+      prev.map((c) =>
+        c.complaint_id === complaintId ? { ...c, status: newStatus } : c
+      )
+    );
+
+    // ✅ Also update selectedComplaint if open
+    if (selectedComplaint?.complaint_id === complaintId) {
+      setSelectedComplaint((prev) => ({ ...prev, status: newStatus }));
+    }
+
+    alert(`Complaint ${complaintId} updated to ${newStatus}`);
+  } catch (error) {
+    console.error("❌ Error updating complaint:", error);
+    alert("Error updating complaint");
+  }
+};
+
 
   // ✅ Fetch complaints from backend
   useEffect(() => {
@@ -94,8 +129,10 @@ export default function Dashboard() {
               <button
                 className="bg-green-600 text-white text-xs rounded px-3 py-1 hover:bg-green-700 focus:outline-none"
                 type="button"
+                onClick={() => updateStatus(selectedComplaint.complaint_id, "In Progress")}
+>
 
-              >
+              
                 Accept
               </button>
               <button

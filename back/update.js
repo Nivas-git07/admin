@@ -30,7 +30,7 @@ app.put("/:id/status", async (req, res) => {
 
   try {
     const result = await pool.query(
-      `UPDATE complaint 
+      `UPDATE complaints 
        SET status = $1 
        WHERE complaint_id = $2 
        RETURNING *`,
@@ -39,6 +39,19 @@ app.put("/:id/status", async (req, res) => {
 
     if (result.rows.length === 0) {
       return res.status(404).json({ error: "Complaint not found" });
+    }
+     const complaint = result.rows[0];
+
+    // 2. Update login table with notification when complaint is In Progress
+    if (status === "In Progress") {
+      const message = `Your complaint ${id} is now In Progress`;
+
+      await pool.query(
+        `UPDATE login 
+         SET message = $1
+         WHERE complaint_id = $2`,
+        [message, id]
+      );
     }
 
     res.json({ message: "Status updated", complaint: result.rows[0] });
