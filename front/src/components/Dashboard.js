@@ -45,11 +45,11 @@ export default function Dashboard() {
               {selectedComplaint.description}
             </p>
             <div className="mb-4 space-y-2 text-sm text-gray-600">
-              <div><strong>Complaint ID:</strong> {selectedComplaint.id}</div>
-              <div><strong>Status:</strong> {selectedComplaint.statusLabel}</div>
+              <div><strong>Complaint ID:</strong> {selectedComplaint.complaint_id}</div>
+              <div><strong>Status:</strong> {selectedComplaint.status}</div>
               <div><strong>Priority:</strong> {selectedComplaint.priority}</div>
               <div><strong>Reported by:</strong> {selectedComplaint.email}</div>
-              <div><strong>Category:</strong> {selectedComplaint.categoryLabel}</div>
+              <div><strong>Category:</strong> {selectedComplaint.title}</div>
               <div><strong>Date Reported:</strong> {selectedComplaint.date}</div>
             </div>
             <div className="flex space-x-2">
@@ -163,9 +163,9 @@ export default function Dashboard() {
         {complaints.map((c) => (
           <article key={c.id} className="report-item">
             <div className="report-tags">
-              <span className="tag-id">{c.id}</span>
-              <span className={`tag-status ${c.status}`}>{c.statusLabel}</span>
-              <span className="tag-priority">{c.priority}</span>
+              <span className="tag-id">{c.complaint_id}</span>
+              <span style={{ color: "red" }}>{c.status}</span>
+              {/* <span className="tag-priority">{c.priority}</span> */}
             </div>
             <h4 className="report-title">{c.title}</h4>
             <p className="report-desc">{c.description}</p>
